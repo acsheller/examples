@@ -1,0 +1,25 @@
+# Ignore Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+sdr-dev/novnc/
+
+# Ignore VS Code settings (optional)
+.vscode/
+
+# Ignore user environment
+.env
+*.log
+*.swp
+
+# Docker files
+*.pid
+*.sock
+*.tar
+*.img
+
+# VNC and runtime stuff
+/home/guser/.vnc
+/var/log/supervisor/

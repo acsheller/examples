@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  app:
+    build: .
+    user: "${MY_UID}:${MY_GID}"
+    volumes:
+      - ./mystuff:/data
+    environment:
+      - UID=${MY_UID}
+      - GID=${MY_GID}
+    tty: true

@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<flow_graph>
+  <timestamp>Mon Apr 01 2024 12:00:00 GMT</timestamp>
+  <block>
+    <key>options</key>
+    <value>
+      <id>test_signal</id>
+      <title>Test Signal</title>
+      <author>ChatGPT</author>
+      <description>Simple sine wave into GUI sinks</description>
+      <window_size></window_size>
+      <generate_options>qt_gui</generate_options>
+      <category>Custom</category>
+      <run_options>prompt</run_options>
+      <run>True</run>
+      <realtime_scheduling>True</realtime_scheduling>
+      <max_nouts>0</max_nouts>
+    </value>
+  </block>
+
+  <block>
+    <key>variable</key>
+    <value>
+      <id>samp_rate</id>
+      <value>32000</value>
+    </value>
+  </block>
+
+  <block>
+    <key>analog_sig_source_x</key>
+    <value>
+      <id>analog_sig_source_x_0</id>
+      <type>float</type>
+      <sample_rate>samp_rate</sample_rate>
+      <frequency>1000</frequency>
+      <amplitude>1</amplitude>
+      <offset>0</offset>
+      <waveform>analog.GR_SIN_WAVE</waveform>
+    </value>
+  </block>
+
+  <block>
+    <key>qtgui_freq_sink_x</key>
+    <value>
+      <id>qtgui_freq_sink_x_0</id>
+      <type>float</type>
+      <fftsize>1024</fftsize>
+      <sample_rate>samp_rate</sample_rate>
+      <name>Frequency</name>
+      <autoscale>True</autoscale>
+      <ymin>-140</ymin>
+      <ymax>10</ymax>
+      <nconnections>1</nconnections>
+    </value>
+  </block>
+
+  <block>
+    <key>qtgui_time_sink_x</key>
+    <value>
+      <id>qtgui_time_sink_x_0</id>
+      <type>float</type>
+      <size>1024</size>
+      <sample_rate>samp_rate</sample_rate>
+      <name>Time</name>
+      <nconnections>1</nconnections>
+      <update_time>0.10</update_time>
+    </value>
+  </block>
+
+  <connection>
+    <source_block_id>analog_sig_source_x_0</source_block_id>
+    <source_key>0</source_key>
+    <sink_block_id>qtgui_freq_sink_x_0</sink_block_id>
+    <sink_key>0</sink_key>
+  </connection>
+
+  <connection>
+    <source_block_id>analog_sig_source_x_0</source_block_id>
+    <source_key>0</source_key>
+    <sink_block_id>qtgui_time_sink_x_0</sink_block_id>
+    <sink_key>0</sink_key>
+  </connection>
+</flow_graph>
