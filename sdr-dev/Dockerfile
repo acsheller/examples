@@ -45,6 +45,11 @@ RUN echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2838", M
 WORKDIR /app
 RUN chown -R guser:guser /app
 
+# Disable screen blanking and lock
+RUN mkdir -p /home/guser/.config/autostart && \
+    echo '[Desktop Entry] Type=Application Exec=xset s off -dpms && pkill -f xfce4-screensaver Hidden=false NoDisplay=false X-GNOME-Autostart-enabled=true Name=DisableScreenSaver' > /home/guser/.config/autostart/disable-screensaver.desktop && \
+    chown -R guser:guser /home/guser/.config
+
 # Configure Supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
